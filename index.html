@@ -1,33 +1,36 @@
 ---
 layout: default
+title: Inicio
 ---
 
-<div class="hero">
-  <h1>Blog de BlueCat & Redes</h1>
-  <p>Documentación, laboratorios y guías prácticas</p>
-</div>
+<div class="home">
+  <div class="hero">
+    <h1>{{ site.title }}</h1>
+    <p>{{ site.description }}</p>
+  </div>
 
-<div class="featured-posts">
-  <h2>📌 Posts Destacados</h2>
-  <div class="posts-grid">
-    {% for post in site.posts limit:3 %}
-      <div class="post-card">
-        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-        <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
-        <a class="btn" href="{{ post.url }}">Leer más</a>
-      </div>
-    {% endfor %}
+  <div class="featured-posts">
+    <h2>📌 Posts Destacados</h2>
+    <div class="posts-grid">
+      {% for post in site.posts limit:3 %}
+        <div class="post-card">
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+          <a class="read-more" href="{{ post.url | relative_url }}">Leer más →</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="all-posts">
+    <h2>📝 Posts Recientes</h2>
+    <ul class="post-list">
+      {% for post in site.posts %}
+        <li>
+          <span class="post-meta">{{ post.date | date: "%d/%m/%Y" }}</span>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
-<div class="all-posts">
-  <h2>📝 Todos los Posts</h2>
-  <ul>
-    {% for post in site.posts %}
-      <li>
-        <a href="{{ post.url }}">{{ post.title }}</a> - <small>{{ post.date | date: "%d %b %Y" }}</small>
-      </li>
-    {% endfor %}
-  </ul>
-</div>
-<hr>
-{% include footer.html %}
