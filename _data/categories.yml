@@ -1,0 +1,6 @@
+- name: Linux
+  url: /categories/linux/
+  count: 45
+- name: CCNA
+  url: /categories/ccna/
+  count: 38
